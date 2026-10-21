@@ -1,0 +1,45 @@
+[package]
+name = "learner-progress-service"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[features]
+dev-docs = ["dep:utoipa-swagger-ui"]
+dev-seed = []
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal"] }
+tower = "0.5"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+nutype = { version = "0.8", features = ["serde"] }
+sea-orm = { version = "2.0.4", default-features = false, features = [
+    "macros",
+    "runtime-tokio-rustls",
+    "sqlx-postgres",
+    "sqlx-sqlite",
+    "with-chrono",
+    "with-uuid",
+    "sqlite-use-returning-for-3_35",
+] }
+sea-orm-migration = { version = "2.0.4", default-features = false, features = [
+    "runtime-tokio-rustls",
+    "sqlx-postgres",
+    "sqlx-sqlite",
+] }
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+thiserror = "2"
+anyhow = "1"
+utoipa = { version = "6", features = ["axum_extras", "chrono", "uuid", "yaml"] }
+utoipa-axum = "0.3"
+strum = { version = "0.28", features = ["derive"] }
+utoipa-swagger-ui = { version = "10", optional = true, features = ["axum", "vendored"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+http-body-util = "0.1"
